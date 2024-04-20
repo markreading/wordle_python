@@ -1,18 +1,10 @@
-## @file wordle_game.py
+## @file terminal_wordle.py
+# simple program to emulate the popular wordle game in the terminal
 
-import time as TIME, random, sys, os
-from colorama import Fore, Back, Style
-
-class print_colors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+import time as TIME                         # used for timing the game
+import random                               # used to get random words
+import os                                   # used once to clear the screen after each word input
+from colorama import Fore, Back, Style      # used for simple color formatting 
 
 ## class for each dictionary that will be needed for this game
 class dictionary():
@@ -81,13 +73,8 @@ class game():
         if user_input == "\help":
             self.print_help()
             return None
-        # check to make sure the input word is the right length
-        elif len(user_input) != self.WORD_LENGTH:
-            print("Please enter a word with " + str(self.WORD_LENGTH) + " letters.")
-            return None
-        # check to make sure the word is in the dictionary
-        elif not full_dict.exists(user_input):
-            print("'" + user_input + "' is not a valid word.  Enter another word.")
+        # check to make sure the input word is the right length and check to make sure the word is in the dictionary
+        elif len(user_input) != self.WORD_LENGTH or not full_dict.exists(user_input):
             return None
         # this function returns the input upon meeting these conditions
         else:
@@ -160,8 +147,24 @@ class game():
         
     # function that prints out the help information
     def print_help(self):
-        print("Help Info:")
-        print("write later")
+        # clear the terminal window
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        # print help text
+        print("How To Play\n")
+        print("Guess the Wordle in 6 tries.")
+        print("Each guess must be a valid 5-letter word.")
+        print("The color of the tiles will change to show how close your guess was to the word.")
+        print("\nExamples:")
+        print(Back.GREEN + "w" + Style.RESET_ALL + "eary")
+        print("W is in the word and in the correct spot.")
+        print("p" + Back.YELLOW + "i" + Style.RESET_ALL + "lls")
+        print("I is in the word but in the wrong spot.")
+        print("vag" + Back.BLACK + "u" + Style.RESET_ALL + "e")
+        print("U is not in the word in any spot.")
+        print("\nPress any key to continue...")
+        # this waits for the user to press a key to continue
+        input()
 
 ## MAIN PROCESS ===============================================================================================
 
@@ -184,6 +187,9 @@ while wordle.guesses_count < wordle.MAX_GUESSES:
     user_input = wordle.get_input()
     # if the users input is not valid, keep getting the input until its ok
     while user_input == None:
+        # print the initial game board
+        wordle.print_game()
+        print("Please enter a valid word with " + str(wordle.WORD_LENGTH) + " letters.")
         user_input = wordle.get_input()
         
     # once we have a valid guess, we can process it, get the colors of the guess, and update the keyboard
@@ -213,4 +219,4 @@ print()
 if won:
     print("Congratulations, you won in " + str(wordle.guesses_count) + " guesses!\nTotal Time: " + str(minutes) + ":" + extra_zero + str(seconds) + "\n")
 else:
-    print("You lose! :(\nThe word was " + wordle.answer + "\nTime used: " + str(minutes) + ":" + extra_zero + str(seconds) + "\n")
+    print("You lose! :(\nThe solution was: " + wordle.answer + "\nTotal Time: " + str(minutes) + ":" + extra_zero + str(seconds) + "\n")
