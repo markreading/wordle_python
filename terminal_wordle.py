@@ -139,7 +139,7 @@ class game():
             print("Enter a " + str(wordle.WORD_LENGTH) + " letter word for your guess.\n")
 
         # print the title and the guess number that we are on
-        print("Python Wordle - Guess #" + str(self.guesses_count + 1), wordle.answer)
+        print("Python Wordle - Guess #" + str(self.guesses_count + 1))
 
         # print the keyboard, show what keys are available and which are not found in the answer
         print(Style.RESET_ALL + "Available letters:")
@@ -166,10 +166,10 @@ class game():
 ## MAIN PROCESS ===============================================================================================
 
 # build wordle dictionary
-wordle_dict = dictionary(file_name = "lib/wordle_dict.txt")
+wordle_dict = dictionary(file_name = "dict_wordle.txt")
 
 # build main dictionary
-full_dict = dictionary(file_name = "lib/full_dictionary.txt")
+full_dict = dictionary(file_name = "dict_all_words.txt")
 
 # initialize game and pick a random word for the answer from the wordle dictionary
 wordle = game(answer = wordle_dict.random_word())
