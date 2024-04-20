@@ -121,12 +121,13 @@ class game():
         if self.guesses_count == 0:
             # Start the game here
             print("Welcome to Wordle. Enter '\help' without quotes for how to play and other information.")
+            # other random information we can tell the user
             # print("Full dictionary length : " + str(full_dict.length))
             # print("Wordle dictionary length: " + str(wordle_dict.length))
-            print("Enter a " + str(wordle.WORD_LENGTH) + " letter word for your guess.\n")
+            # print("Enter a " + str(wordle.WORD_LENGTH) + " letter word for your guess.\n")
 
         # print the title and the guess number that we are on
-        print("Python Wordle - Guess #" + str(self.guesses_count + 1))
+        print("Python Wordle - Guess #" + str(self.guesses_count + 1) + "/" + str(self.MAX_GUESSES))
 
         # print the keyboard, show what keys are available and which are not found in the answer
         print(Style.RESET_ALL + "Available letters:")
