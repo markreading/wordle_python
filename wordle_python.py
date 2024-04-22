@@ -127,7 +127,7 @@ class game():
             # print("Enter a " + str(wordle.WORD_LENGTH) + " letter word for your guess.\n")
 
         # print the title and the guess number that we are on
-        print("Python Wordle - Guess #" + str(self.guesses_count + 1) + "/" + str(self.MAX_GUESSES))
+        print("Python Wordle - Guess #" + str(self.guesses_count + 1) + "/" + str(self.MAX_GUESSES) + "\n--------------------------------------------")
 
         # print the keyboard, show what keys are available and which are not found in the answer
         print(Style.RESET_ALL + "Available letters:")
@@ -135,7 +135,7 @@ class game():
             print(value + key + Back.WHITE + " ", end="")
             
         # make sure to reset the style after printing the keyboard
-        print(Style.RESET_ALL)
+        print(Style.RESET_ALL + "\n--------------------------------------------\nGuesses:")
 
         # print out each guess one at a time, one per line
         for guess in self.guesses:
