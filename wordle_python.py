@@ -115,7 +115,7 @@ class game():
 
     def print_game(self):
         # clear the terminal window
-        os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('cls' if os.name == 'nt' else 'clear') 
 
         # if we are just beginning the game, print out the welcome text, and how to get help
         if self.guesses_count == 0:
